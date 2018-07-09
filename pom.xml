@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>codeLife</groupId>
+    <artifactId>codeLife</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 父工程的pom文件必须是pom，如果子工程的话，我们通常会打成jar或者war包 -->
+    <packaging>pom</packaging>
+    <!-- 所有的子mvn module名，每新建一个mvn工程，这里会自动添加 -->
+    <modules>
+        <module>myTest</module>
+        <module>hadoopAndHive</module>
+        <module>spark</module>
+    </modules>
+
+    <!-- 这里存放各种公共参数 -->
+    <properties>
+        <!-- 解决IntelliJ idea中刷新pom就恢复language level恢复默认为5的方法 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- 编译时的编码格式 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- 在project的pom中，存放的是对于整个工程的都需要的依赖，而子mvn module 需要什么依赖可以自由添加 -->
+    <dependencies>
+        <!-- 这些事log4j2 的基本配置；log4j-web中的配置是java web才需要的 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <!-- Junit 需要的依赖 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.9</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    
+</project>
