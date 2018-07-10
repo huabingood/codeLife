@@ -14,16 +14,19 @@ BOT_NAME = 'pySpider'
 SPIDER_MODULES = ['pySpider.spiders']
 NEWSPIDER_MODULE = 'pySpider.spiders'
 
+# 设置日志等级
+# LOG_LEVEL= 'WARNING'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'pySpider (+http://www.yourdomain.com)'
+USER_AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
 
 # 为 False 是不遵循robots协议
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -34,7 +37,7 @@ ROBOTSTXT_OBEY = False
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = True
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -45,6 +48,7 @@ DEFAULT_REQUEST_HEADERS = {
   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'Accept-Language': 'zh_CN',
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+  'Cookie': 'UM_distinctid=16483af3a790-0e632919573cbb-47e1039-1fa400-16483af3a7bc1; Hm_lvt_032dff9bffa6a496d22bc46f7e7c04e2=1531217657; CNZZDATA1000302343=2024175771-1531216596-%7C1531222796; Hm_lpvt_032dff9bffa6a496d22bc46f7e7c04e2=1531226045',
 }
 
 # Enable or disable spider middlewares
@@ -84,6 +88,7 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable showing throttling stats for every response received:
 #AUTOTHROTTLE_DEBUG = False
 
+# 将request缓存到本地，如果是调试建议放开注释
 # Enable and configure HTTP caching (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 #HTTPCACHE_ENABLED = True
