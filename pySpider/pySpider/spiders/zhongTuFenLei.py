@@ -40,9 +40,10 @@ class zhongTuFenLeiSpider(scrapy.Spider):
                 zhongTu["zhongTuValue"]=zhongTuValue
                 yield zhongTu
 
-                print(zhongTuCode+'\t'+zhongTuValue)
-                print('-------------------------------------------')
-                print(nextPage)
-                sleepTime=[1,2,3]
-                time.sleep(random.choice(sleepTime))
-                yield Request(url=nextPage,meta={"fatherValue":zhongTuValue},callback=self.parse)
+                # print(zhongTuCode+'\t'+zhongTuValue)
+                # print('-------------------------------------------')
+                # print(nextPage)
+                # sleepTime=[1,2,3]
+                # time.sleep(random.choice(sleepTime))
+
+                yield Request(url=nextPage,meta={"fatherValue":zhongTuValue,"change_proxy": True},callback=self.parse)
