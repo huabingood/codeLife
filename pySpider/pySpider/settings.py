@@ -17,6 +17,14 @@ NEWSPIDER_MODULE = 'pySpider.spiders'
 # 设置日志等级
 # LOG_LEVEL= 'WARNING'
 
+# 使用Feed将数据写到本地csv文件中
+# 这种方式无需配置pipline,就能将数据保存到本地，但是无法对item进行过滤
+# 如果想对item进行操作，必须设置pipline
+FEED_URI = 'file:///home/huabingood/resutl/zhongTuFenLei.csv'
+FEED_FORMAT = 'CSV'
+
+
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'pySpider (+http://www.yourdomain.com)'
 USER_AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
