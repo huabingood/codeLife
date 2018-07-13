@@ -83,18 +83,24 @@ DEFAULT_REQUEST_HEADERS = {
 #    'pySpider.pipelines.PyspiderPipeline': 300,
 #}
 
+# 根据网速实现自动限速（限制一个线程的请求间隔）
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
-#AUTOTHROTTLE_ENABLED = True
+# 开启智能线束
+# AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
+# 初始化线程延迟，默认是5秒，通常智能的延迟就是在这个值和实际相应时间的均值
+# AUTOTHROTTLE_START_DELAY = 5
 # The maximum download delay to be set in case of high latencies
-#AUTOTHROTTLE_MAX_DELAY = 60
+# 最大延迟时间，反正我也不知道干嘛用的
+# UTOTHROTTLE_MAX_DELAY = 60
+# 请求线程的并发量
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
-#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+# AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+# 是否自动开启debug模式，调试的时候建议开启
 # Enable showing throttling stats for every response received:
-#AUTOTHROTTLE_DEBUG = False
+# AUTOTHROTTLE_DEBUG = False
 
 # 将request缓存到本地，如果是调试建议放开注释
 # Enable and configure HTTP caching (disabled by default)
