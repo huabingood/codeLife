@@ -20,7 +20,7 @@ NEWSPIDER_MODULE = 'pySpider.spiders'
 # 使用Feed将数据写到本地csv文件中
 # 这种方式无需配置pipline,就能将数据保存到本地，但是无法对item进行过滤
 # 如果想对item进行操作，必须设置pipline
-FEED_URI = 'file:///home/huabingood/resutl/zhongTuFenLei.csv'
+FEED_URI = 'file:///home/huabingood/result/zhongTuFenLei.csv'
 FEED_FORMAT = 'CSV'
 
 
@@ -33,17 +33,20 @@ USER_AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
+# 并发请求数
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 1
+CONCURRENT_REQUESTS = 3
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 2
+# 延迟时间
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
+# 禁用cookie,如果网站不需要登录操作的话
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = True
 
@@ -56,7 +59,6 @@ DEFAULT_REQUEST_HEADERS = {
   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'Accept-Language': 'zh_CN',
   'User-Agent': 'Mozilla/5.0 (iPhone 84; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.0 MQQBrowser/7.8.0 Mobile/14G60 Safari/8536.25 MttCustomUA/2 QBWebViewType/1 WKType/1',
-  'Cookie': 'UM_distinctid=16483af3a790-0e632919573cbb-47e1039-1fa400-16483af3a7bc1; Hm_lvt_032dff9bffa6a496d22bc46f7e7c04e2=1531217657; CNZZDATA1000302343=2024175771-1531216596-%7C1531222796; Hm_lpvt_032dff9bffa6a496d22bc46f7e7c04e2=1531226045',
 }
 
 # Enable or disable spider middlewares
@@ -65,11 +67,13 @@ DEFAULT_REQUEST_HEADERS = {
 #    'pySpider.middlewares.PyspiderSpiderMiddleware': 543,
 #}
 
+# 各种下载中间件的配置：比如设置IP代理，随机UA等
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'pySpider.middlewares.PyspiderDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+  # 'pySpider.middlewares.PyspiderDownloaderMiddleware': 543,
+   'pySpider.middlewares.ProxyMiddleware': 100,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html

@@ -6,6 +6,7 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from  pySpider.utils import getIPFromDaXiang
 
 
 class PyspiderSpiderMiddleware(object):
@@ -101,3 +102,51 @@ class PyspiderDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+
+# IP 代理的相关设置
+class ProxyMiddleware(object):
+    # '''从代理中发出请求'''
+    def process_request(self,request,spider):
+        # 获取IP,为了防止反复去IP，将第一个IP设为错误的IP
+        proxyIP = '176.31.71.157:3128'
+        proxy = 'http://'+proxyIP
+        print(proxy+"一直被调用")
+        request.meta['proxy']=proxy
+
+
+
+    ''' 验证代理访问是否存在问题，如果存才问题，就重新请求一次代理IP
+        主要处理访问异常（有错误码返回的情况）
+    '''
+    def process_response(self, request, response, spider):
+        # 如果返回的response状态不是200，重新生成当前request对象
+        if response.status != 200:
+            print(response.meta.get('proxy')+"在本次请求中无法使用，错误代码是："+response.status)
+            proxyIP  = getIPFromDaXiang.getRealIP()
+            print("这次获取的代理IP是："+proxyIP)
+            # 根据协议头拼接代理的协议
+            if request.url.startswith('http://'):
+                proxy = 'http://'+ proxyIP
+                request.meta['proxy']=proxy
+            else:
+                proxy = 'https://'+proxyIP
+            request.meta['proxy']=proxy
+        return request
+
+    '''
+        如果代理存在问题，就切换代理再次访问
+        主要处理没有返回的异常，比如直接被拒绝之类的
+    '''
+    def process_exception(self, request, exception, spider):
+        print("代理连接异常，重新获取")
+        proxyIP  = getIPFromDaXiang.getRealIP()
+        # 根据协议头拼接代理的协议
+        if request.url.startswith('http://'):
+            proxy = 'http://'+ proxyIP
+            request.meta['proxy']=proxy
+        else:
+            proxy = 'https://'+proxyIP
+            request.meta['proxy']=proxy
+        return request
