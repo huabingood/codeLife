@@ -8,6 +8,7 @@
 from scrapy import signals
 from  pySpider.utils import getIPFromDaXiang
 import random
+from pySpider.utils import getDaXiang
 
 
 class PyspiderSpiderMiddleware(object):
@@ -111,13 +112,12 @@ class ProxyMiddleware(object):
     EXCEPTIONS_TO_CHANGE = (TimeoutError, ConnectionRefusedError, ValueError)
     '''从代理中发出请求'''
     def process_request(self,request,spider):
-        proxyIP=getIPFromDaXiang.get1IP()
 
         if request.url.startswith('http://'):
-            proxy = 'http://'+ proxyIP
+            proxy = 'http://'+ getDaXiang.getIP()
             request.meta['proxy']=proxy
         else:
-            proxy = 'https://'+proxyIP
+            proxy = 'https://'+getDaXiang.getIP()
         print(proxy+"调用")
         request.meta['proxy']=proxy
 
@@ -130,14 +130,14 @@ class ProxyMiddleware(object):
         # 如果返回的response状态不是200，重新生成当前request对象
         if response.status != 200:
             print(request.meta.get('proxy')+"在本次请求中无法使用，错误代码是："+str(response.status))
-            proxyHost = request.meta.get('proxy').split('//')[1]
-            getIPFromDaXiang.drop1IP(proxyHost)
+            # proxyHost = request.meta.get('proxy').split('//')[1]
+            # getIPFromDaXiang.drop1IP(proxyHost)
             # 根据协议头拼接代理的协议
             if request.url.startswith('http://'):
-                proxy = 'http://'+ getIPFromDaXiang.get1IP()
+                proxy = 'http://'+ getDaXiang.getIP()
                 request.meta['proxy']=proxy
             else:
-                proxy = 'https://'+ getIPFromDaXiang.get1IP()
+                proxy = 'https://'+ getDaXiang.getIP()
             request.meta['proxy']=proxy
         return request
 
@@ -146,18 +146,18 @@ class ProxyMiddleware(object):
         主要处理没有返回的异常，比如直接被拒绝之类的
     '''
     def process_exception(self, request, exception, spider):
-        print("代理连接异常，重新获取")
-        #捕获几乎所有的异常
-        print("走到下载器的异常位置了。")
-        print(exception)
-        proxyHost = request.meta.get('proxy').split('//')[1]
-        print(proxyHost+"被删除")
-        getIPFromDaXiang.drop1IP(proxyHost)
+        # print("代理连接异常，重新获取")
+        # #捕获几乎所有的异常
+        # print("走到下载器的异常位置了。")
+        # print(exception)
+        # proxyHost = request.meta.get('proxy').split('//')[1]
+        # print(proxyHost+"被删除")
+        # getIPFromDaXiang.drop1IP(proxyHost)
 
         if request.url.startswith('http://'):
-            proxy = 'http://'+ getIPFromDaXiang.get1IP()
+            proxy = 'http://'+ getDaXiang.getIP()
             request.meta['proxy']=proxy
         else:
-            proxy = 'https://'+ getIPFromDaXiang.get1IP()
+            proxy = 'https://'+ getDaXiang.getIP()
             request.meta['proxy']=proxy
         return request
