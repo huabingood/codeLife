@@ -17,6 +17,9 @@ NEWSPIDER_MODULE = 'pySpider.spiders'
 # 设置日志等级
 # LOG_LEVEL= 'WARNING'
 
+# 如果请求超过某个时间段就会被干掉
+DOWNLOAD_TIMEOUT=30
+
 # 使用Feed将数据写到本地csv文件中
 # 这种方式无需配置pipline,就能将数据保存到本地，但是无法对item进行过滤
 # 如果想对item进行操作，必须设置pipline
@@ -48,7 +51,7 @@ DOWNLOAD_DELAY = 1
 
 # 禁用cookie,如果网站不需要登录操作的话
 # Disable cookies (enabled by default)
-COOKIES_ENABLED = True
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False

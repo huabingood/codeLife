@@ -38,6 +38,7 @@ class zhongTuFenLeiSpider(scrapy.Spider):
                 # yield zhongTuFenLeiItem
                 zhongTu["zhongTuCode"]=zhongTuCode
                 zhongTu["zhongTuValue"]=zhongTuValue
+                print(str(zhongTu))
                 yield zhongTu
 
                 # print(zhongTuCode+'\t'+zhongTuValue)
