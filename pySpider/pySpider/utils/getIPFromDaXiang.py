@@ -3,11 +3,12 @@
 import requests
 import json
 import random
+import threading
 
 
 
 myOrderid="555201784430512"
-ipNumsgetOnce='4'
+ipNumsgetOnce='8'
 format='json'
 DaXiangDaiLiUrl='http://tpv.daxiangdaili.com/ip/'
 
@@ -46,14 +47,8 @@ def getRealIP():
 
 
     http_url=['http://www.clcindex.com/',
-              'http://www.clcindex.com/',
               'http://www.clcindex.com/']
-
-    # 这个网址是验证公网IP的，可以用来验证数据是否走了代理
-    # http_url='http://icanhazip.com/'
     proxyIPs = getIP()
-
-    # 声明一个接受
     for ip in proxyIPs:
         realIP=ip['host']+':'+str(ip['port'])
         # ipPool.append(realIP)
@@ -77,12 +72,18 @@ def getRealIP():
     随机获取一个IP返给scrapy
 '''
 def get1IP():
-    ipNums = len(ipPool)
-    if ipNums<2:
+    if not ipPool:
         getRealIP()
-        print('因为长度为:'+str(ipNums)+',所以我被执行了。')
+    if len(ipPool)<5:
+        # 因为多了一个括号就不是多线程了
+        # t = threading.Thread(target=getRealIP())
+        t = threading.Thread(target=getRealIP)
+        t.setDaemon(True)
+        t.start()
+        print('因为长度为:'+str(len(ipPool))+',所以我被执行了。')
     print("被请求了，目前所有的IP是："+str(ipPool))
     return random.choice(ipPool)
+
 
 '''
     删除列表中的一个IP

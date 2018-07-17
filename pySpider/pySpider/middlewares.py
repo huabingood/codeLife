@@ -114,10 +114,10 @@ class ProxyMiddleware(object):
     def process_request(self,request,spider):
 
         if request.url.startswith('http://'):
-            proxy = 'http://'+ getDaXiang.getIP()
+            proxy = 'http://'+ getIPFromDaXiang.get1IP()
             request.meta['proxy']=proxy
         else:
-            proxy = 'https://'+getDaXiang.getIP()
+            proxy = 'https://'+getIPFromDaXiang.get1IP()
         print(proxy+"调用")
         request.meta['proxy']=proxy
 
@@ -134,30 +134,30 @@ class ProxyMiddleware(object):
             # getIPFromDaXiang.drop1IP(proxyHost)
             # 根据协议头拼接代理的协议
             if request.url.startswith('http://'):
-                proxy = 'http://'+ getDaXiang.getIP()
+                proxy = 'http://'+ getIPFromDaXiang.get1IP()
                 request.meta['proxy']=proxy
             else:
-                proxy = 'https://'+ getDaXiang.getIP()
-            request.meta['proxy']=proxy
-        return request
+                proxy = 'https://'+ getIPFromDaXiang.get1IP()
+                request.meta['proxy']=proxy
+                return request
+        else:
+            return response
 
     '''
         如果代理存在问题，就切换代理再次访问
         主要处理没有返回的异常，比如直接被拒绝之类的
     '''
     def process_exception(self, request, exception, spider):
-        # print("代理连接异常，重新获取")
-        # #捕获几乎所有的异常
-        # print("走到下载器的异常位置了。")
-        # print(exception)
-        # proxyHost = request.meta.get('proxy').split('//')[1]
-        # print(proxyHost+"被删除")
-        # getIPFromDaXiang.drop1IP(proxyHost)
+        print("代理连接异常，重新获取")
+        print(exception)
+        if isinstance(exception, self.EXCEPTIONS_TO_CHANGE):
+            proxyHost = request.meta.get('proxy').split('//')[1]
+            getIPFromDaXiang.drop1IP(proxyHost)
 
-        if request.url.startswith('http://'):
-            proxy = 'http://'+ getDaXiang.getIP()
-            request.meta['proxy']=proxy
-        else:
-            proxy = 'https://'+ getDaXiang.getIP()
-            request.meta['proxy']=proxy
-        return request
+            if request.url.startswith('http://'):
+                proxy = 'http://'+ getIPFromDaXiang.get1IP()
+                request.meta['proxy']=proxy
+            else:
+                proxy = 'https://'+ getIPFromDaXiang.get1IP()
+                request.meta['proxy']=proxy
+            return request

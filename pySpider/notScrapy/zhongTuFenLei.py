@@ -41,20 +41,20 @@ def getProxyIPPoor():
     proxyIPPoolJson = json.loads(proxyIPPoolsText)
     for proxyIP in proxyIPPoolJson:
         realProxyIP=proxyIP['host']+':'+str(proxyIP['port'])
-        proxyIPPool.append(realProxyIP)
-        # try:
-        #     proxyIPs={'http':realProxyIP}
-        #     response = requests.get(zhongTuUrl,headers=head,proxies=proxyIPs)
-        #     httpCode=response.status_code
-        #     if httpCode==200:
-        #         print(realProxyIP+"测试通过！")
-        #         proxyIPPool.append(realProxyIP)
-        #     else:
-        #         print(realProxyIP+"返回状态异常")
-        #         continue
-        # except Exception:
-        #     print(realProxyIP+"抛出异常")
-        #     print(Exception)
+
+        try:
+            proxyIPs={'http':realProxyIP}
+            response = requests.get(zhongTuUrl,headers=head,proxies=proxyIPs)
+            httpCode=response.status_code
+            if httpCode==200:
+                print(realProxyIP+"测试通过！")
+                proxyIPPool.append(realProxyIP)
+            else:
+                print(realProxyIP+"返回状态异常")
+                continue
+        except Exception:
+            print(realProxyIP+"抛出异常")
+            print(Exception)
 
 '''
     从代理线程池中随机获取一个代理IP，
