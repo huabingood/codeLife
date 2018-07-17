@@ -11,6 +11,11 @@ import random
 from pySpider.utils import getDaXiang
 
 
+import base64
+from scrapy.downloadermiddlewares.httpproxy import HttpProxyMiddleware
+
+
+
 class PyspiderSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -106,58 +111,100 @@ class PyspiderDownloaderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
+'''
+    怀疑不是代码的问题，而是代理的质量太差，导致无法获取到数据
+'''
+# # IP 代理的相关设置
+# class ProxyMiddleware(object):
+#     EXCEPTIONS_TO_CHANGE = (TimeoutError, ConnectionRefusedError, ValueError)
+#     '''从代理中发出请求'''
+#     def process_request(self,request,spider):
+#
+#         if request.url.startswith('http://'):
+#             proxy = 'http://'+ getDaXiang.getIP()
+#             request.meta['proxy']=proxy
+#         else:
+#             proxy = 'https://'+getDaXiang.getIP()
+#         print(proxy+"调用")
+#         request.meta['proxy']=proxy
+#
+#
+#
+#     ''' 验证代理访问是否存在问题，如果存才问题，就重新请求一次代理IP
+#         主要处理访问异常（有错误码返回的情况）
+#     '''
+#     def process_response(self, request, response, spider):
+#         # 如果返回的response状态不是200，重新生成当前request对象
+#         if response.status != 200:
+#             print(request.meta.get('proxy')+"在本次请求中无法使用，错误代码是："+str(response.status))
+#             # proxyHost = request.meta.get('proxy').split('//')[1]
+#             # getIPFromDaXiang.drop1IP(proxyHost)
+#             # 根据协议头拼接代理的协议
+#             if request.url.startswith('http://'):
+#                 proxy = 'http://'+ getDaXiang.getIP()
+#                 request.meta['proxy']=proxy
+#             else:
+#                 proxy = 'https://'+ getDaXiang.getIP()
+#             request.meta['proxy']=proxy
+#         return request
+#
+#     '''
+#         如果代理存在问题，就切换代理再次访问
+#         主要处理没有返回的异常，比如直接被拒绝之类的
+#     '''
+#     def process_exception(self, request, exception, spider):
+#         # print("代理连接异常，重新获取")
+#         # #捕获几乎所有的异常
+#         # print("走到下载器的异常位置了。")
+#         # print(exception)
+#         # proxyHost = request.meta.get('proxy').split('//')[1]
+#         # print(proxyHost+"被删除")
+#         # getIPFromDaXiang.drop1IP(proxyHost)
+#
+#         if request.url.startswith('http://'):
+#             proxy = 'http://'+ getDaXiang.getIP()
+#             request.meta['proxy']=proxy
+#         else:
+#             proxy = 'https://'+ getDaXiang.getIP()
+#             request.meta['proxy']=proxy
+#         return request
 
-# IP 代理的相关设置
+'''
+    阿布代理
+'''
+# 代理服务器
+proxyServer = "http://http-dyn.abuyun.com:9020"
+# 隧道身份信息
+proxyUser = "H4J7N7721S559Z1D"
+proxyPass = "CD9DB618E6224FCA"
+# 这个是python2版本
+# proxyAuth = "Basic " + base64.urlsafe_b64encode(proxyUser + ":" + proxyPass)
+# 这个是python3版本
+proxyAuth = "Basic " + base64.urlsafe_b64encode(bytes((proxyUser + ":" + proxyPass), "ascii")).decode("utf8")
+
+
 class ProxyMiddleware(object):
-    EXCEPTIONS_TO_CHANGE = (TimeoutError, ConnectionRefusedError, ValueError)
-    '''从代理中发出请求'''
-    def process_request(self,request,spider):
+    proxies = {}
+    # 每次实例化的时候，声明一个请求地址
+    def __init__(self, auth_encoding='latin-1'):
+        self.auth_encoding = auth_encoding
+        self.proxies[proxyServer] = proxyUser + proxyPass
 
-        if request.url.startswith('http://'):
-            proxy = 'http://'+ getDaXiang.getIP()
-            request.meta['proxy']=proxy
-        else:
-            proxy = 'https://'+getDaXiang.getIP()
-        print(proxy+"调用")
-        request.meta['proxy']=proxy
+    def process_request(self, request, spider):
+        request.meta["proxy"] = proxyServer
 
+        request.headers["Proxy-Authorization"] = proxyAuth
+        print("已经开始请求代理了")
 
-
-    ''' 验证代理访问是否存在问题，如果存才问题，就重新请求一次代理IP
-        主要处理访问异常（有错误码返回的情况）
-    '''
-    def process_response(self, request, response, spider):
-        # 如果返回的response状态不是200，重新生成当前request对象
-        if response.status != 200:
-            print(request.meta.get('proxy')+"在本次请求中无法使用，错误代码是："+str(response.status))
-            # proxyHost = request.meta.get('proxy').split('//')[1]
-            # getIPFromDaXiang.drop1IP(proxyHost)
-            # 根据协议头拼接代理的协议
-            if request.url.startswith('http://'):
-                proxy = 'http://'+ getDaXiang.getIP()
-                request.meta['proxy']=proxy
-            else:
-                proxy = 'https://'+ getDaXiang.getIP()
-            request.meta['proxy']=proxy
-        return request
-
-    '''
-        如果代理存在问题，就切换代理再次访问
-        主要处理没有返回的异常，比如直接被拒绝之类的
-    '''
-    def process_exception(self, request, exception, spider):
-        # print("代理连接异常，重新获取")
-        # #捕获几乎所有的异常
-        # print("走到下载器的异常位置了。")
-        # print(exception)
-        # proxyHost = request.meta.get('proxy').split('//')[1]
-        # print(proxyHost+"被删除")
-        # getIPFromDaXiang.drop1IP(proxyHost)
-
-        if request.url.startswith('http://'):
-            proxy = 'http://'+ getDaXiang.getIP()
-            request.meta['proxy']=proxy
-        else:
-            proxy = 'https://'+ getDaXiang.getIP()
-            request.meta['proxy']=proxy
-        return request
+    # def process_response(self, request, response, spider):
+    #     if response.status != 200:
+    #         print("请求返回码的错误"+str(response.status))
+    #         request.meta["proxy"] = proxyServer
+    #         request.headers["Proxy-Authorization"] = proxyAuth
+    #     return request
+    #
+    # def process_exception(self, request, exception, spider):
+    #     print("这里是请求异常，反正我也不懂，就这样吧")
+    #     print(exception)
+    #     request.meta["proxy"] = proxyServer
+    #     request.headers["Proxy-Authorization"] = proxyAuth

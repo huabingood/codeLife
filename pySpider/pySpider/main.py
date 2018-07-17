@@ -13,3 +13,4 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # 执行scrapy ,需要三个参数，其中jobble指这个爬虫的名字
 # 在调试之前，注意在setting.py 中不要遵循robots协议
 execute(["scrapy","crawl","zhongTuFenLei"])
+# execute(["scrapy","crawl","abu"])
