@@ -41,7 +41,7 @@ def getProxyIPPoor():
     proxyIPPoolJson = json.loads(proxyIPPoolsText)
     for proxyIP in proxyIPPoolJson:
         realProxyIP=proxyIP['host']+':'+str(proxyIP['port'])
-        proxyIPPool.append(realProxyIP)
+
         try:
             proxyIPs={'http':realProxyIP}
             response = requests.get(zhongTuUrl,headers=head,proxies=proxyIPs)
