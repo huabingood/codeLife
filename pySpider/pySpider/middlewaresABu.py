@@ -196,13 +196,14 @@ class ProxyMiddleware(object):
         request.headers["Proxy-Authorization"] = proxyAuth
         print("已经开始请求代理了")
 
-    # def process_response(self, request, response, spider):
-    #     if response.status != 200:
-    #         print("请求返回码的错误"+str(response.status))
-    #         request.meta["proxy"] = proxyServer
-    #         request.headers["Proxy-Authorization"] = proxyAuth
-    #     return request
-    #
+    def process_response(self, request, response, spider):
+        if response.status != 200:
+            print("请求返回码的错误"+str(response.status))
+            request.meta["proxy"] = proxyServer
+            request.headers["Proxy-Authorization"] = proxyAuth
+            return request
+        return response
+
     # def process_exception(self, request, exception, spider):
     #     print("这里是请求异常，反正我也不懂，就这样吧")
     #     print(exception)
