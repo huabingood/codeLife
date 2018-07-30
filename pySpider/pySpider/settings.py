@@ -23,7 +23,7 @@ DOWNLOAD_TIMEOUT=30
 # 使用Feed将数据写到本地csv文件中
 # 这种方式无需配置pipline,就能将数据保存到本地，但是无法对item进行过滤
 # 如果想对item进行操作，必须设置pipline
-FEED_URI = 'file:///home/huabingood/result/zhongTuFenLei.csv'
+FEED_URI = 'file:///home/huabingood/resutl/zhongTuFenLei.csv'
 FEED_FORMAT = 'CSV'
 
 
@@ -71,8 +71,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   'pySpider.middlewares.PyspiderDownloaderMiddleware': 543,
-   'pySpider.middlewares.ProxyMiddleware':100
+   #'pySpider.middlewares.PyspiderDownloaderMiddleware': 543,
+  'pySpider.middlewares.ProxyMiddleware':100
 }
 
 # Enable or disable extensions
