@@ -15,6 +15,7 @@
         <module>myTest</module>
         <module>hadoopAndHive</module>
         <module>spark</module>
+        <module>importMassImg2Qiniu</module>
     </modules>
 
     <!-- 这里存放各种公共参数 -->
