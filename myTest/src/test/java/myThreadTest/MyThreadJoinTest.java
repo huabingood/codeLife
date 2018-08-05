@@ -2,6 +2,11 @@ package myThreadTest;
 
 import myThread.MyThreadJoin;
 
+/**
+ * 线程join是在start()方法之后调用的，对于已启动的线程没有影响，
+ * 是让主线程等待子线程的完成
+ * 其后的线程，由于需要main线程调用，故无法启动
+ */
 public class MyThreadJoinTest {
     public static void main(String[] args){
         MyThreadJoin  myThreadJoin1 = new MyThreadJoin();
