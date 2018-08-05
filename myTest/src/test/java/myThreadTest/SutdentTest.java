@@ -22,6 +22,5 @@ public class SutdentTest {
         t1.start();
         t2.start();
 
-        arrayb
     }
 }
