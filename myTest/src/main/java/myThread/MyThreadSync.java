@@ -26,8 +26,9 @@ public class MyThreadSync implements Runnable {
 
     /**
      * 异常
+     * 是因为a没有被同步，最后输出的结果会存在问题
      */
-    public void run() {
+/*    public void run() {
         int a = 10;
         while (true) {
 
@@ -46,5 +47,11 @@ public class MyThreadSync implements Runnable {
 
         }
 
+    }*/
+
+
+    public void run(){
+
     }
+
 }
