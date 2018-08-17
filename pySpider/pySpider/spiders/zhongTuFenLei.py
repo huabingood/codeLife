@@ -10,7 +10,7 @@ class zhongTuFenLeiSpider(scrapy.Spider):
     # 引擎名称
     name = 'zhongTuFenLei'
     allowed_domains = ['clcindex.com']
-    start_urls = ['http://www.clcindex.com']    # 起始的url
+    start_urls = ['http://www.clcindex.com/category/TM6/']    # 起始的url
 
     # scrapy内置的解析引擎
     def parse(self, response):

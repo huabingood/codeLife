@@ -18,12 +18,12 @@ NEWSPIDER_MODULE = 'pySpider.spiders'
 # LOG_LEVEL= 'WARNING'
 
 # 如果请求超过某个时间段就会被干掉
-DOWNLOAD_TIMEOUT=30
+DOWNLOAD_TIMEOUT=60
 
 # 使用Feed将数据写到本地csv文件中
 # 这种方式无需配置pipline,就能将数据保存到本地，但是无法对item进行过滤
 # 如果想对item进行操作，必须设置pipline
-FEED_URI = 'file:///home/huabingood/resutl/zhongTuFenLei.csv'
+FEED_URI = 'file:///home/huabingood/result/zhongTuFenLei.csv'
 FEED_FORMAT = 'CSV'
 
 
@@ -37,12 +37,12 @@ USER_AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 10
+CONCURRENT_REQUESTS = 2
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 0.2
+DOWNLOAD_DELAY = 0.5
 RANDOMIZE_DOWNLOAD_DELAY=True
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
@@ -72,7 +72,7 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    #'pySpider.middlewares.PyspiderDownloaderMiddleware': 543,
-  'pySpider.middlewares.ProxyMiddleware':100
+  # 'pySpider.middlewares.ProxyMiddleware':100
 }
 
 # Enable or disable extensions
