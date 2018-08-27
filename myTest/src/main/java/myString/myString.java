@@ -1,3 +1,5 @@
+package myString;
+
 public class myString {
     public static void main(String[] args){
         // 字符串相加，或者直接使用+；在StringBuffer中使用append()
