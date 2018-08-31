@@ -2,7 +2,6 @@ package oop;
 
 /**
  * 创建一个图书类，包含：书名 作者 价格
- *
  */
 public class Books {
     private String name;
