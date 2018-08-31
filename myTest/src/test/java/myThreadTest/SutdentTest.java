@@ -4,6 +4,8 @@ import myThread.Student;
 import myThread.StudentCustomer;
 import myThread.StudentProducer;
 
+import java.util.concurrent.ThreadPoolExecutor;
+
 /**
  * 主调函数，保证中间通信方式的唯一性即可，就student对象必须在main方法中实例化
  */
@@ -15,6 +17,7 @@ public class SutdentTest {
 
         StudentProducer  studentProducer = new StudentProducer(s);
         StudentCustomer studentCustomer = new StudentCustomer(s);
+
 
         Thread t1 = new Thread(studentCustomer,"消费者");
         Thread t2 = new Thread(studentProducer,"生产者");
