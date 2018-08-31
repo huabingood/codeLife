@@ -8,7 +8,7 @@ import org.junit.Test;
  */
 public class BooksTest {
     @Test
-    public void createObject(){
+    public void createObject() {
         Books book = new Books();
         book.setName("快学Scala");
         book.setAuthor("xxxx");
@@ -17,8 +17,8 @@ public class BooksTest {
     }
 
     @Test
-    public void createObject2(){
-        Books book = new Books("java","huabingood",23.45);
+    public void createObject2() {
+        Books book = new Books("java", "huabingood", 23.45);
         System.out.println(book.toString());
         book.setAuthor("hyw");
         System.out.println(book.getAuthor());
