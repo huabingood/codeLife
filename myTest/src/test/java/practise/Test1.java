@@ -1,5 +1,10 @@
 package practise;
 
+import com.mysql.jdbc.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Test1 {
     public static void main(String[] args){
         String str = "abc";
@@ -9,6 +14,7 @@ public class Test1 {
 
         StringBuilder stringBuilder = new StringBuilder("hhhhhhhhh");
         System.out.println(stringBuilder.substring(1,2));
+
 
     }
     
