@@ -9,7 +9,7 @@ import java.util.concurrent.ArrayBlockingQueue;
  *
  */
 public class Producer implements Runnable {
-    ArrayBlockingQueue arrayBlockingQueue = null;
+    ArrayBlockingQueue arrayBlockingQueue;
 
     public Producer(ArrayBlockingQueue arrayBlockingQueue) {
         this.arrayBlockingQueue = arrayBlockingQueue;

@@ -19,7 +19,8 @@ public class UseZiJie {
         try {
             // 推荐使用第二种方式，因为可以指定编码格式
             // reader = new BufferedReader(new FileReader(startFile));
-            reader = new InputStreamReader(new FileInputStream(startFile),"utf-8");
+            //reader = new InputStreamReader(new FileInputStream(startFile),"utf-8");
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(startFile),"utf-8"));
             writer = new BufferedWriter(new FileWriter(endFile,true));
 
             String line = null;
