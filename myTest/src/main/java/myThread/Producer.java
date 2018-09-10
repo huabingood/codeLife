@@ -5,6 +5,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * 生产者生产数据，往定长的阻塞队列中塞数据
+ * 有几个消费者线程，就塞入几个毒丸
  *
  */
 public class Producer implements Runnable {

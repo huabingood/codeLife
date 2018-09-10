@@ -5,8 +5,14 @@ import myThread.Producer;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
+/**
+ * 对消费者生产者的调用
+ * 针对单生产-多消费者模型的停止
+ * 有几个消费者就给出几个毒丸，使用者消费者数量已知的情况。
+ */
 public class ProducerCustomerTest {
     public static void main(String[] args){
+        // 进行资源共享的队列
         ArrayBlockingQueue<String> arrayBlockingQueue = new ArrayBlockingQueue<String>(10);
 
         Producer producer = new Producer(arrayBlockingQueue);
