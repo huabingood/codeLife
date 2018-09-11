@@ -23,7 +23,11 @@ while read line
 do
     if [  -n "${line}" ];then
         neme=$(echo "${line}" | awk -F "[《》]" '{print $2}')
-        newLine="${name}"","
+
+        if [ -n "${name}" ];then
+        newLine="${newLine}""\"""${name}""\""","
+        fi
+
     fi
 done < "${filePath}"
 
