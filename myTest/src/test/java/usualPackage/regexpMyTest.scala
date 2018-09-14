@@ -3,6 +3,7 @@ package usualPackage
 import org.junit.Test
 
 /**
+  *
   * 描述：
   * 使用scala写的测试类
   *
