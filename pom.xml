@@ -8,51 +8,94 @@
     <artifactId>codeLife</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- 父工程的pom文件必须是pom，如果子工程的话，我们通常会打成jar或者war包 -->
+    <!-- 父工程的打包方式必须是pom，如果子工程的话，我们通常会打成jar或者war包 -->
     <packaging>pom</packaging>
+
     <!-- 所有的子mvn module名，每新建一个mvn工程，这里会自动添加 -->
     <modules>
         <module>myTest</module>
         <module>hadoopAndHive</module>
         <module>spark</module>
-        <module>importMassImg2Qiniu</module>
     </modules>
 
     <!-- 这里存放各种公共参数 -->
     <properties>
-        <!-- 解决IntelliJ idea中刷新pom就恢复language level恢复默认为5的方法 -->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <!-- 编译时的编码格式 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 这里可以配置各种版本号，方便统一修改-->
+        <mvn.compiler.version>3.8.0</mvn.compiler.version>
+        <jdk.version>1.8</jdk.version>
+        <encoding.version>UTF-8</encoding.version>
+        <junit.version>4.9</junit.version>
+        <log4j.version>1.2.15</log4j.version>
     </properties>
 
-    <!-- 在project的pom中，存放的是对于整个工程的都需要的依赖，而子mvn module 需要什么依赖可以自由添加 -->
-    <dependencies>
-        <!-- 这些事log4j2 的基本配置；log4j-web中的配置是java web才需要的 -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.8.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.8.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-web</artifactId>
-            <version>2.8.2</version>
-        </dependency>
-        <!-- Junit 需要的依赖 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.9</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
-    
+    <!-- 通常这种依赖建议在儿子工程中使用，孙子工程继承儿子工程的依赖，不要在父工程中使用因为父工程对应的子工程过多 -->
+    <!--    &lt;!&ndash; 在project的pom中，存放的是对于整个工程的都需要的依赖，而子mvn module 需要什么依赖可以自由添加 &ndash;&gt;
+        <dependencies>
+            &lt;!&ndash; 这些事log4j2 的基本配置；log4j-web中的配置是java web才需要的 &ndash;&gt;
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>2.8.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>2.8.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-web</artifactId>
+                <version>2.8.2</version>
+            </dependency>
+            &lt;!&ndash; Junit 需要的依赖 &ndash;&gt;
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>-->
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 这个是测试的依赖 -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- 这个是日志的依赖 -->
+            <dependency>
+                <groupId>apache-log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 这里指定编译的生命周期插件-->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- 编译的插件，并指定版本-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${mvn.compiler.version}</version>
+                    <!-- 这里执行编译时的jdk版本-->
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <!-- 指定编码格式-->
+                        <encoding>${encoding.version}</encoding>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
 </project>
