@@ -33,8 +33,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- 记录日志的log4j -->
+        <dependency>
+            <groupId>apache-log4j</groupId>
+            <artifactId>log4j</artifactId>
         </dependency>
 
         <!-- 这个是解析excel文档的poi -->

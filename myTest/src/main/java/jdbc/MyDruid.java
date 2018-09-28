@@ -1,8 +1,8 @@
 package jdbc;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
+
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class MyDruid {
-    static Logger logger = LogManager.getLogger();
+    static Logger logger = Logger.getLogger(MyDruid.class);
 
     private static DruidDataSource druidDataSource = null;
     private static MyDruid myDruid= null;
