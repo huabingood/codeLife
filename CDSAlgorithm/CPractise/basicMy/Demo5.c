@@ -16,4 +16,6 @@ main(){
     printf("%.2f\n",d);
     printf("%11.2f\n",d);   // 域宽主要用来对齐，而不是控制数据长度的K
 
+    printf("%d",d);
+
 }
