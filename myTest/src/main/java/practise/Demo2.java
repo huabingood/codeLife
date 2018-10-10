@@ -33,5 +33,9 @@ public class Demo2 {
             }
         });
 
+        float f  = 123456789.1234f;
+        System.out.println(f);
+
+
     }
 }
