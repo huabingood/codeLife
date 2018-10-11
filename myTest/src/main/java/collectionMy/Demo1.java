@@ -1,6 +1,5 @@
 package collectionMy;
 
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 
 import java.util.ArrayList;
 
