@@ -35,11 +35,10 @@ int deleteList(SeqList *sl,int e){
                 sl->elem[i]=sl->elem[i+1];
             }
             return OK;
-        }else{
-            printf("元素%d不存在！",e);
-            return ERR;
         }
     }
+    printf("元素%d不存在！",e);
+    return ERR;
 }
 
 // 遍历输出顺序表中的内容
