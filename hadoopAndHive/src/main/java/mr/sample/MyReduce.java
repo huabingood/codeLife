@@ -3,7 +3,7 @@ package mr.sample;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.w3c.dom.Text;
+import org.apache.hadoop.io.Text;
 
 import java.io.IOException;
 
