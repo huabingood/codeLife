@@ -9,6 +9,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import utiles.HDFSCheck;
 
 import java.io.IOException;
 
@@ -22,6 +23,11 @@ public class RunHere {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         // 获取配置
         Configuration conf = new Configuration();
+
+        Path outPath = new Path("/outpath/o2");
+        HDFSCheck.ifExistRm(conf,outPath);
+
+
 
         // 启动一个任务
         Job job = Job.getInstance(conf);
@@ -38,7 +44,7 @@ public class RunHere {
 
         // 输入输出路径
         FileInputFormat.setInputPaths(job,new Path("/input/*"));
-        FileOutputFormat.setOutputPath(job, new Path("/outpath/o2"));
+        FileOutputFormat.setOutputPath(job, outPath);
 
         // 告诉yarn运行的主类
         job.setJarByClass(RunHere.class);
