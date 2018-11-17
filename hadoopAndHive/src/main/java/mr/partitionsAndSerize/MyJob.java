@@ -1,8 +1,8 @@
 package mr.partitionsAndSerize;
 
+import mr.testlog.MyPartitioner;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -29,6 +29,9 @@ public class MyJob {
         job.setMapOutputValueClass(FlowBean.class);
         job.setOutputKeyClass(Text.class);
         job.setMapOutputValueClass(FlowBean.class);
+
+        job.setPartitionerClass(MyPartitioner.class);
+        job.setNumReduceTasks(4);
 
         FileInputFormat.setInputPaths(job, inpath);
         FileOutputFormat.setOutputPath(job, outpath);
