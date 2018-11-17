@@ -17,7 +17,7 @@ public class MyJob {
         Job job = Job.getInstance(conf);
 
         Path outPath = new Path("/output/o1");
-        HDFSCheck.ifExistRm(conf,outPath);
+        HDFSCheck.ifExistRm(conf, outPath);
 
         job.setJobName("TestLog");
         job.setMapperClass(MyMap.class);
@@ -28,11 +28,11 @@ public class MyJob {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 
-        FileInputFormat.setInputPaths(job,new Path("/input/test/test.log"));
-        FileOutputFormat.setOutputPath(job,outPath);
+        FileInputFormat.setInputPaths(job, new Path("/input/test/test.log"));
+        FileOutputFormat.setOutputPath(job, outPath);
 
         boolean res = job.waitForCompletion(true);
-        System.out.println(res?"success":"failed");
+        System.out.println(res ? "success" : "failed");
 
     }
 }
