@@ -13,6 +13,11 @@ import java.io.IOException;
 public class MyJob {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         Configuration conf = new Configuration();
+        // 提交到yarn上运行，没有这些就是单机模式的，即使有配置文件
+        // 在jar的情况下不需要设置
+        conf.set("mapreduce.framework.name", "yarn");
+        conf.set("yarn.resourcemanager.hostname", "hdcluster01");
+        conf.set("yarn.nodemanager.aux-services", "mapreduce_shuffle");
 
         Job job = Job.getInstance(conf);
 
@@ -20,9 +25,6 @@ public class MyJob {
         HDFSCheck.ifExistRm(conf, outPath);
 
         job.setJobName("TestLog");
-        // job.setJarByClass(mr.testlog.MyJob.class);
-
-
         job.setMapperClass(mr.testlog.MyMap.class);
         job.setReducerClass(mr.testlog.MyReduce.class);
 
