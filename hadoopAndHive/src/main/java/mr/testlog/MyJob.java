@@ -16,7 +16,7 @@ public class MyJob {
         // 提交到yarn上运行，没有这些就是单机模式的，即使有配置文件
         // 在jar的情况下不需要设置
         conf.set("mapreduce.framework.name", "yarn");
-        conf.set("yarn.resourcemanager.hostname", "hdcluster01");
+        conf.set("yarn.resourcemanager.hostname", "huabingood02");
         conf.set("yarn.nodemanager.aux-services", "mapreduce_shuffle");
 
         Job job = Job.getInstance(conf);
