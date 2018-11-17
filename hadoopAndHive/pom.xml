@@ -64,9 +64,14 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>mr.sample.RunHere</mainClass> <!-- 你的主类名 -->
+                            <mainClass>mr.testlog.MyJob</mainClass> <!-- 你的主类名 -->
                         </manifest>
                     </archive>
+
+                    <excludes>
+                            <!---->
+                            <exclude>**/*.xml</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

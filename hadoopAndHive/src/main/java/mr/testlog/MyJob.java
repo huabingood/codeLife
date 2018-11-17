@@ -19,9 +19,12 @@ public class MyJob {
         Path outPath = new Path("/output/o1");
         HDFSCheck.ifExistRm(conf, outPath);
 
-        job.setJobName("TestLog");
-        job.setMapperClass(MyMap.class);
-        job.setReducerClass(MyReduce.class);
+        // job.setJobName("TestLog");
+        job.setJarByClass(mr.testlog.MyJob.class);
+
+
+        job.setMapperClass(mr.testlog.MyMap.class);
+        job.setReducerClass(mr.testlog.MyReduce.class);
 
         job.setMapOutputValueClass(Text.class);
         job.setMapOutputKeyClass(Text.class);
