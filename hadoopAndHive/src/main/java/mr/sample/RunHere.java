@@ -26,6 +26,7 @@ public class RunHere {
 
         // 提交到yarn上运行，没有这些就是单机模式的，即使有配置文件
         // 在jar的情况下不需要设置
+        // 我不知道为什么设置了没有用，可能是因为我在Hadoop的client上提交的任务
         conf.set("mapreduce.framework.name", "yarn");
         conf.set("yarn.resourcemanager.hostname", "huabingood02");
         conf.set("yarn.nodemanager.aux-services", "mapreduce_shuffle");

@@ -18,6 +18,7 @@ import java.io.IOException;
 public class MyReduce extends Reducer<Text, IntWritable,Text, LongWritable> {
     @Override
     protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+        // 在这里统计词频
         int num=0;
         for(IntWritable value:values){
             num+=value.get();

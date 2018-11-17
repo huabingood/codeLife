@@ -58,6 +58,7 @@
 
     <build>
         <plugins>
+            <!-- 主要是打jar包的插件，jar包是不带相关的依赖的 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -69,7 +70,7 @@
                     </archive>
 
                     <excludes>
-                            <!---->
+                            <!-- 这里的命令是打jar包时忽略各种以xml结尾的配置文件，将配置文件打进jar包会报错-->
                             <exclude>**/*.xml</exclude>
                     </excludes>
                 </configuration>
