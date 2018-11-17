@@ -25,8 +25,7 @@ public class RunHere {
         Configuration conf = new Configuration();
 
         Path outPath = new Path("/outpath/o2");
-        HDFSCheck.ifExistRm(conf,outPath);
-
+        HDFSCheck.ifExistRm(conf, outPath);
 
 
         // 启动一个任务
@@ -43,7 +42,7 @@ public class RunHere {
         job.setOutputValueClass(LongWritable.class);
 
         // 输入输出路径
-        FileInputFormat.setInputPaths(job,new Path("/input/*"));
+        FileInputFormat.setInputPaths(job, new Path("/input/*"));
         FileOutputFormat.setOutputPath(job, outPath);
 
         // 告诉yarn运行的主类
@@ -51,7 +50,7 @@ public class RunHere {
 
         // 将job给yarn，并打印任务是否成功
         boolean res = job.waitForCompletion(true);
-        System.out.println(res?"success":"failed");
+        System.out.println(res ? "success" : "failed");
     }
 
 }

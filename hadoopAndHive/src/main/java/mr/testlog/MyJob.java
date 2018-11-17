@@ -19,8 +19,8 @@ public class MyJob {
         Path outPath = new Path("/output/o1");
         HDFSCheck.ifExistRm(conf, outPath);
 
-        // job.setJobName("TestLog");
-        job.setJarByClass(mr.testlog.MyJob.class);
+        job.setJobName("TestLog");
+        // job.setJarByClass(mr.testlog.MyJob.class);
 
 
         job.setMapperClass(mr.testlog.MyMap.class);
