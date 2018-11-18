@@ -1,6 +1,5 @@
 package mr.partitionsAndSerize;
 
-import mr.testlog.MyPartitioner;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
@@ -14,6 +13,11 @@ import java.io.IOException;
 public class MyJob {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         Configuration conf = new Configuration();
+
+        conf.set("fs.default.name", "hdfs://ns1");
+        conf.set("hadoop.job.user", "huabingood");
+        conf.set("mapreduce.framework.name","yarn");
+        conf.set("yarn.resourcemanager.hostname","huabingood02");
 
         Job job = Job.getInstance(conf);
 

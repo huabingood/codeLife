@@ -65,13 +65,12 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>mr.testlog.MyJob</mainClass> <!-- 你的主类名 -->
+                            <mainClass>mr.partitionsAndSerize.MyJob</mainClass> <!-- 你的主类名 -->
                         </manifest>
                     </archive>
-
                     <excludes>
-                            <!-- 这里的命令是打jar包时忽略各种以xml结尾的配置文件，将配置文件打进jar包会报错-->
-                            <exclude>**/*.xml</exclude>
+                        <!-- 这里的命令是打jar包时忽略各种以xml结尾的配置文件，将配置文件打进jar包会报错-->
+                        <exclude>**/*.xml</exclude>
                     </excludes>
                 </configuration>
             </plugin>

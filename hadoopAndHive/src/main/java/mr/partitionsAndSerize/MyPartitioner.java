@@ -1,4 +1,4 @@
-package mr.testlog;
+package mr.partitionsAndSerize;
 
 import mr.partitionsAndSerize.FlowBean;
 import org.apache.hadoop.io.Text;
