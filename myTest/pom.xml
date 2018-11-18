@@ -36,12 +36,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- 记录日志的log4j -->
-        <dependency>
-            <groupId>apache-log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
-
         <!-- 这个是解析excel文档的poi -->
         <dependency>
             <groupId>org.apache.poi</groupId>
