@@ -16,10 +16,11 @@ public class MyMap extends Mapper<LongWritable, Text,SortFlowBean,Text> {
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         String[] words = value.toString()
                 .split("\t");
-        sfb.setUpFlow(Long.parseLong(words[words.length-3]));
-        sfb.setDownFlow(Long.parseLong(words[words.length-2]));
-        text.set(words[1]);
 
+        if(words.length>5) {
+            sfb.set(Long.parseLong(words[words.length - 3]),Long.parseLong(words[words.length - 2]));
+            text.set(words[1]);
+        }
         context.write(sfb,text);
     }
 }

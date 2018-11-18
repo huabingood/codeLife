@@ -14,10 +14,10 @@ public class MyJob {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         Configuration conf = new Configuration();
 
-        conf.set("fs.default.name", "hdfs://ns1");
-        conf.set("hadoop.job.user", "huabingood");
-        conf.set("mapreduce.framework.name", "yarn");
-        conf.set("yarn.resourcemanager.hostname", "huabingood02");
+//        conf.set("fs.default.name", "hdfs://ns1");
+//        conf.set("hadoop.job.user", "huabingood");
+//        conf.set("mapreduce.framework.name", "yarn");
+//        conf.set("yarn.resourcemanager.hostname", "huabingood02");
 
         // 同时指定该job的名字
         Job job = Job.getInstance(conf, "huabingood_jar");

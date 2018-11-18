@@ -17,23 +17,13 @@ public class SortFlowBean implements WritableComparable<SortFlowBean> {
     public SortFlowBean(long upFlow, long downFlow, long sumFlow) {
         this.upFlow = upFlow;
         this.downFlow = downFlow;
-        this.sumFlow = upFlow + downFlow;
+        this.sumFlow = this.upFlow + this.downFlow;
     }
-
-    public long getUpFlow() {
-        return upFlow;
-    }
-
-    public void setUpFlow(long upFlow) {
+    //
+    public void set(long upFlow,long downFlow){
         this.upFlow = upFlow;
-    }
-
-    public long getDownFlow() {
-        return downFlow;
-    }
-
-    public void setDownFlow(long downFlow) {
         this.downFlow = downFlow;
+        this.sumFlow = upFlow+downFlow;
     }
 
     /**
@@ -64,6 +54,6 @@ public class SortFlowBean implements WritableComparable<SortFlowBean> {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "upflow:"+upFlow+", downflow:"+downFlow+",totalflow"+sumFlow;
     }
 }
