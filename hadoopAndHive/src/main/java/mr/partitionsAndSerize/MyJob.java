@@ -19,13 +19,16 @@ public class MyJob {
         conf.set("mapreduce.framework.name","yarn");
         conf.set("yarn.resourcemanager.hostname","huabingood02");
 
-        Job job = Job.getInstance(conf);
+        // 同时指定该job的名字
+        Job job = Job.getInstance(conf,"huabingood_jar");
 
         Path inpath = new Path("/input/test/test.log");
         Path outpath = new Path("/output/o1");
         HDFSCheck.ifExistRm(conf, outpath);
 
-        job.setJobName("partitionAndSerize");
+        // 这里必须这样写，否者打成jar运行时会出现异常
+        job.setJarByClass(mr.partitionsAndSerize.MyJob.class);
+
         job.setMapperClass(MyMap.class);
         job.setReducerClass(MyReduce.class);
 
