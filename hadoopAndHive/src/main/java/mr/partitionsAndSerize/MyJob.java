@@ -16,11 +16,11 @@ public class MyJob {
 
         conf.set("fs.default.name", "hdfs://ns1");
         conf.set("hadoop.job.user", "huabingood");
-        conf.set("mapreduce.framework.name","yarn");
-        conf.set("yarn.resourcemanager.hostname","huabingood02");
+        conf.set("mapreduce.framework.name", "yarn");
+        conf.set("yarn.resourcemanager.hostname", "huabingood02");
 
         // 同时指定该job的名字
-        Job job = Job.getInstance(conf,"huabingood_jar");
+        Job job = Job.getInstance(conf, "huabingood_jar");
 
         Path inpath = new Path("/input/test/test.log");
         Path outpath = new Path("/output/o1");
