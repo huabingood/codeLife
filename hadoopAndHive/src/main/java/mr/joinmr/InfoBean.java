@@ -11,12 +11,12 @@ public class InfoBean implements Writable {
     private String date;
     private String pname;
     private double price;
-    private byte flag;
+    private char flag;
 
     public InfoBean() {
     }
 
-    public InfoBean(String id, String date, String pname, double price, byte flag) {
+    public InfoBean(String id, String date, String pname, double price, char flag) {
         this.id = id;
         this.date = date;
         this.pname = pname;
@@ -56,11 +56,11 @@ public class InfoBean implements Writable {
         this.price = price;
     }
 
-    public byte getFlag() {
+    public char getFlag() {
         return flag;
     }
 
-    public void setFlag(byte flag) {
+    public void setFlag(char flag) {
         this.flag = flag;
     }
 
@@ -72,7 +72,7 @@ public class InfoBean implements Writable {
         out.writeUTF(date);
         out.writeUTF(pname);
         out.writeDouble(price);
-        out.writeByte(flag);
+        out.writeChar(flag);
     }
 
     @Override
@@ -81,6 +81,11 @@ public class InfoBean implements Writable {
         date=in.readUTF();
         pname=in.readUTF();
         price=in.readDouble();
-        flag=in.readByte();
+        flag=in.readChar();
+    }
+
+    @Override
+    public String toString() {
+        return "id:"+id+"\tdate:"+date+"\tpname:"+pname+"\tprice:"+price;
     }
 }
