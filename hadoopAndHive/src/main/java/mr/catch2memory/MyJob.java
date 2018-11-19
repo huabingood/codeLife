@@ -19,20 +19,23 @@ public class MyJob {
         Job job = Job.getInstance(conf,"catch_mapJoin");
 
         Path inpath = new Path("/input/t_order.txt");
-        Path outpath = new Path("/output/t_product.txt");
+        Path outpath = new Path("/output/o2");
         HDFSCheck.ifExistRm(conf,outpath);
 
-        // 将HDFS上的小文件分发到各个运算节点
-        DistributedCache.addCacheFile(new URI("hdfs://ns1/input/t_product.txt"),conf);
 
         job.setJarByClass(MyJob.class);
         job.setMapOutputValueClass(NullWritable.class);
         job.setMapOutputKeyClass(Text.class);
 
+        job.setMapperClass(MyMap.class);
         job.setNumReduceTasks(0);
 
         FileInputFormat.setInputPaths(job,inpath);
         FileOutputFormat.setOutputPath(job,outpath);
+
+        // 将HDFS上的小文件分发到各个运算节点
+        DistributedCache.addCacheFile(new Path("/input/t_product.txt").toUri(),job.getConfiguration());
+
 
         boolean b = job.waitForCompletion(true);
         System.exit(b?1:0);

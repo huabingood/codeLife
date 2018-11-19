@@ -65,7 +65,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>mr.partitionsAndSerize.MyJob</mainClass> <!-- 你的主类名 -->
+                            <mainClass>mr.catch2memory.MyJob</mainClass> <!-- 你的主类名 -->
                         </manifest>
                     </archive>
                     <excludes>
