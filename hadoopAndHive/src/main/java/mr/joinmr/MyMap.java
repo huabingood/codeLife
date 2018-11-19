@@ -10,8 +10,8 @@ import java.io.IOException;
 public class MyMap extends Mapper<LongWritable, Text,Text,InfoBean> {
     private final String ORDER_NAME="t_order.txt";
     private final String PRODUCT_NAME="t_product.txt";
-    private final char ORDER_FLAG=0;
-    private final char PRODUCT_FLAG=1;
+    private final String ORDER_FLAG="order";
+    private final String PRODUCT_FLAG="product";
 
     InfoBean infoBean = new InfoBean();
     Text text = new Text();
@@ -37,6 +37,7 @@ public class MyMap extends Mapper<LongWritable, Text,Text,InfoBean> {
             infoBean.setFlag(PRODUCT_FLAG);
             text.set(fields[0]);
         }
+
 
         context.write(text,infoBean);
 

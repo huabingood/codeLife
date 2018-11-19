@@ -26,7 +26,7 @@ public class MyJob {
 
         job.setJarByClass(MyJob.class);
         job.setMapperClass(MyMap.class);
-        job.setReducerClass(mr.joinmr.MyReduce.class);
+        job.setReducerClass(MyReduce.class);
 
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(InfoBean.class);

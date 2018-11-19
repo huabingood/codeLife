@@ -7,16 +7,16 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class InfoBean implements Writable {
-    private String id;
-    private String date;
-    private String pname;
-    private double price;
-    private char flag;
+    private String id="";
+    private String date="";
+    private String pname="";
+    private double price=0;
+    private String flag="";
 
     public InfoBean() {
     }
 
-    public InfoBean(String id, String date, String pname, double price, char flag) {
+    public InfoBean(String id, String date, String pname, double price, String flag) {
         this.id = id;
         this.date = date;
         this.pname = pname;
@@ -56,11 +56,11 @@ public class InfoBean implements Writable {
         this.price = price;
     }
 
-    public char getFlag() {
+    public String getFlag() {
         return flag;
     }
 
-    public void setFlag(char flag) {
+    public void setFlag(String flag) {
         this.flag = flag;
     }
 
@@ -72,7 +72,7 @@ public class InfoBean implements Writable {
         out.writeUTF(date);
         out.writeUTF(pname);
         out.writeDouble(price);
-        out.writeChar(flag);
+        out.writeUTF(flag);
     }
 
     @Override
@@ -81,11 +81,11 @@ public class InfoBean implements Writable {
         date=in.readUTF();
         pname=in.readUTF();
         price=in.readDouble();
-        flag=in.readChar();
+        flag=in.readUTF();
     }
 
     @Override
     public String toString() {
-        return "id:"+id+"\tdate:"+date+"\tpname:"+pname+"\tprice:"+price;
+        return "id:"+id+"\tdate:"+date+"\tpname:"+pname+"\tprice:"+price+"\tfalg:"+flag;
     }
 }
