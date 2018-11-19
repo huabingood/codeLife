@@ -10,8 +10,6 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import utiles.HDFSCheck;
 
-import java.net.URI;
-
 public class MyJob {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
@@ -34,6 +32,7 @@ public class MyJob {
         FileOutputFormat.setOutputPath(job,outpath);
 
         // 将HDFS上的小文件分发到各个运算节点
+        // 反正各个节点共享的东西要放到最后
         DistributedCache.addCacheFile(new Path("/input/t_product.txt").toUri(),job.getConfiguration());
 
 

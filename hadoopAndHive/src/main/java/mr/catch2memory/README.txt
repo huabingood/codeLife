@@ -16,7 +16,8 @@ P0002	锤子T1	1000	3000
 3.这个跟Sparkd的分发很类似
 4.分发数据到各个节点的设置如下：DistributedCache.addCacheFile(new URI("hdfs://ns1/input/t_product.txt"),conf);
 5.map中专门写相关的代码来读取分发到内存中的数据。通常我们在map处理过程中的cleanup()是对map进行初始化设置的，可以理解为构造代码块
-
+6.获取分布式缓存数据的路径
+7.在分发文件的语句必须放在job提交类的最后，否则map会找不到路径的。
 
 
 
