@@ -21,6 +21,9 @@ public class MyMap extends Mapper<LongWritable, Text,SortFlowBean,Text> {
             sfb.set(Long.parseLong(words[words.length - 3]),Long.parseLong(words[words.length - 2]));
             text.set(words[1]);
         }
+        // 这里是Bean作为键，因为MR在shuffle过程中，只对键进行排序和分区。
+        // 因为是Bean作为键，所以值就成了手机号，因此 只要Bean不同，即使手机号相同，也会被认为是不同的数据。无法对相同手机号
+        // 的总流量进行汇总。
         context.write(sfb,text);
     }
 }
