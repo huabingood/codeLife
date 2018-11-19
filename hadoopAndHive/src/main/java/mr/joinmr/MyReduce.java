@@ -4,7 +4,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
-import sun.rmi.server.InactiveGroupException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -25,6 +24,8 @@ public class MyReduce extends Reducer<Text,InfoBean,InfoBean, NullWritable> {
 
         // 分别将两个bean加入不同的list中，然后做二层遍历；因为join存在n:n的可能
 
+        // 这种方法不知道为什么会导致ArrayList中的对象时同一个。
+        // 好像infoBean每次都是一个同一个空间
 /*        for (InfoBean infoBean : values) {
             if (infoBean.getFlag().equals("product") ){
                 middle = infoBean;

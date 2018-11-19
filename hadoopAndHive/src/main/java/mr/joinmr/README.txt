@@ -37,3 +37,6 @@ P0002,锤子T1	,1000,3000
 
 -- 实现原理
 将关联条件作为map输出的key,将两表满足join条件的数据携带来源文件信息，发往同一个task，并在reduce中进行数据串联
+1.null的序列化的值为NullWritable,给NullWritable赋值使用NullWritable.get()
+2.hadoop在序列化的过程中，Bean的成员变量中不能有空值，否则会报空指针异常
+3.在reduce进行join的过程中，不知为什么ArrayList中的数据会不停的变化。
