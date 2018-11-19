@@ -4,6 +4,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -27,7 +28,7 @@ public class MyJob {
         job.setMapperClass(MyMap.class);
         job.setReducerClass(mr.joinmr.MyReduce.class);
 
-        job.setMapOutputKeyClass(LongWritable.class);
+        job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(InfoBean.class);
         job.setOutputKeyClass(InfoBean.class);
         job.setOutputValueClass(NullWritable.class);
