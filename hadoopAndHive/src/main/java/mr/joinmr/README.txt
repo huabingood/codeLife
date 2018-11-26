@@ -40,3 +40,4 @@ P0002,锤子T1	,1000,3000
 1.null的序列化的值为NullWritable,给NullWritable赋值使用NullWritable.get()
 2.hadoop在序列化的过程中，Bean的成员变量中不能有空值，否则会报空指针异常
 3.在reduce进行join的过程中，不知为什么ArrayList中的数据会不停的变化。
+4.如何从map中获取当前处理文件分片的文件名
