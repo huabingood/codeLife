@@ -33,28 +33,43 @@
 
     <!-- 编程需要的相关hadoop依赖 -->
     <dependencies>
-    <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-common</artifactId>
-        <version>${hadoop.version}</version>
-    </dependency>
-    <dependency>
-        <!-- 注意hadoop-core的版本编号比较怪异 -->
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-core</artifactId>
-        <version>2.6.0-mr1-cdh5.14.2</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-hdfs</artifactId>
-        <version>${hadoop.version}</version>
-    </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+        <dependency>
+            <!-- 注意hadoop-core的版本编号比较怪异 -->
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-core</artifactId>
+            <version>2.6.0-mr1-cdh5.14.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>${hadoop.version}</version>
         </dependency>
+
+        <!-- 编程需要的kafka依赖 -->
+        <dependency>
+            <!-- produce和consumer的依赖 -->
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <!-- kafka Stream的依赖 -->
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams-scala_2.11</artifactId>
+            <version>2.1.0</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>
