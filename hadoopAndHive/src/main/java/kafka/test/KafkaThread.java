@@ -3,17 +3,52 @@ package kafka.test;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 
 import java.util.Arrays;
 import java.util.Properties;
 
-public class KafkaConsumerTest {
+/**
+ * 这个多线程的方法不知道为什么只有一个线程
+ */
+public class KafkaThread {
+    public static final  String TOPIC="google";
+
 
     public static void main(String[] args){
+        // 这种写法并不是多线程
+        // 只是run方法体执行了两遍，并不是run执行了两遍
+/*        new Thread(){
+            @Override
+            public void run() {
+                for(int i=0;i<2;i++){
+                    System.out.println(i+"hahahhahahhah");
+                    getDataFromKafka(i);
+
+                }
+            }
+        }.start();*/
+
+        new Thread(){
+            @Override
+            public void run() {
+                getDataFromKafka(0);
+            }
+        }.start();
+        new Thread(){
+            @Override
+            public void run() {
+                getDataFromKafka(1);
+            }
+        }.start();
+
+    }
+
+    public static void getDataFromKafka(int offset){
         Properties props = new Properties();
         // bootstrap.servers设置要连接的Broker，多个可以使用逗号隔开。
         props.put("bootstrap.servers", "huabingood01:9092");
-        props.put("group.id", "test");
+        props.put("group.id", "test1");
         // 设置enable.auto.commit为true开启自动提交offset，自动提交的频率由 auto.commit.interval.ms 设置。
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
@@ -23,19 +58,22 @@ public class KafkaConsumerTest {
         props.put("value.deserializer",
                 "org.apache.kafka.common.serialization.StringDeserializer");
 
+
+
         // 创建一个消费者对象。KafkaConsumer的第一个泛型是offset，第二个泛型是message
         KafkaConsumer<String,String> consumer  = new KafkaConsumer<String, String>(props);
-        // consumer.subscribe 决定该consumer订阅哪些主题。一个consumer可以订阅多个主题
-        consumer.subscribe(Arrays.asList("mytopic"));
+
+        consumer.assign(Arrays.asList(new TopicPartition(TOPIC,0),new TopicPartition(TOPIC,1)));
+        consumer.seek(new TopicPartition(TOPIC,offset),0);
 
         while(true){
             // 后面的好像是如果数据失败，等待多少秒
             ConsumerRecords<String,String> records = consumer.poll(1000);
             for(ConsumerRecord record:records){
-                System.out.println("offset:"+record.offset()+"key"+record.key()+"value"+record.value());
+                System.out.println("offset:"+record.offset()+"key"+record.key()+"value"+record.value()+record.partition());
             }
         }
-
+        // System.out.println("输出数据"+start);
     }
 
 }
