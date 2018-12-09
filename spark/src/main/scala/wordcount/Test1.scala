@@ -1,5 +1,6 @@
 package wordcount
 
+import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkConf, SparkContext}
 
 object Test1 {
@@ -11,9 +12,12 @@ object Test1 {
     val sc = new SparkContext(conf)
 
     // 进行词频统计
-    sc.textFile("hdfs:/ns1/user/hive/warehouse/books/")
+    sc.textFile("hdfs://ns1/user/hive/warehouse/hive_test.db/books/*")
+      // 如果实在分不清flatMap和Map怎么使用，建议使用map
+      // .map(line=>{ val words = line.split("\t");for(i <- words){ (i,1)};})
       .flatMap(x => x.split("\t"))
       .map(x => (x, 1))
+      .persist(StorageLevel.MEMORY_AND_DISK)
       .reduceByKey((_ + _))
       .collect()
 

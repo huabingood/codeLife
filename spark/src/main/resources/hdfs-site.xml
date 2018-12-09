@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <property>
+        <!-- 为namenode集群定义一个services name,名字随便区，但是如果是HA的话，core-site.xml中的文件系统就必须是这个命名空间 -->
+        <name>dfs.nameservices</name>
+        <value>ns1</value>
+    </property>
+    <property>
+        <!-- nameservice 包含哪些namenode，为各个namenode起别名 -->
+        <name>dfs.ha.namenodes.ns1</name>
+        <value>nn1,nn2</value>
+    </property>
+    <property>
+        <!--  名为nn1的namenode 的rpc地址和端口号，rpc用来和datanode通讯 -->
+        <name>dfs.namenode.rpc-address.ns1.nn1</name>
+        <value>huabingood01:8020</value>
+     </property>
+     <property>
+        <!-- 名为nn2的namenode 的rpc地址和端口号，rpc用来和datanode通讯  -->
+        <name>dfs.namenode.rpc-address.ns1.nn2</name>
+        <value>huabingood02:8020</value>
+     </property>
+     <property>
+        <!--名为nn1的namenode 的http地址和端口号，web客户端 -->
+        <name>dfs.namenode.http-address.ns1.nn1</name>
+        <value>huabingood01:50070</value>
+     </property>
+     <property>
+        <!--名为nn2的namenode 的http地址和端口号，web客户端 -->
+        <name>dfs.namenode.http-address.ns1.nn2</name>
+        <value>huabingood02:50070</value>
+     </property>
+     <property>
+        <!--  两个NN节点共享数据存放在JournalNode上；保证NN切换的数据完整性 -->
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://huabingood01:8485;huabingood02:8485;huabingood03:8485/ns1</value>
+     </property>
+     <property>
+        <!--  journalnode在本次存储日志的地方 -->
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/opt/hadoops/bigDatas/hadoop/jounalLog</value>
+     </property>
+     <property>
+        <!-- 一旦失败，自动切换 -->
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value>
+     </property>
+     <property>
+        <!-- 切换的时候好知道哪个是Active,哪个是Standby的 -->
+        <name>dfs.client.failover.proxy.provider.ns1</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+     </property>
+     <property>
+        <!-- 出现异常后，通过该种方式通信，杀掉异常的进程；保证journal的唯一性  -->
+        <name>dfs.ha.fencing.methods</name>
+        <value>sshfence</value>
+     </property>
+     <property>
+        <name>dfs.ha.fencing.ssh.private-key-files</name>
+        <value>/home/huabingood/.ssh/id_rsa</value>
+     </property>
+    
+     <!-- 配置基本设置 -->
+     <property>
+        <!-- 设置副本数 -->
+        <name>dfs.replication</name>
+        <value>3</value>
+     </property>
+     <property>
+        <!-- fsimage在本地的存储路径 -->
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///opt/hadoops/bigDatas/hadoop/data/nn</value>
+     </property>
+     <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///opt/hadoops/bigDatas/hadoop/data/dn</value>
+     </property>
+
+     <!-- 配置SecondaryNamenode -->
+     <property>
+        <name>dfs.secondary.http.address</name>
+        <value>huabingood03:50090</value>
+     </property>
+</configuration>
