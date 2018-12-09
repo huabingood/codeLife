@@ -11,6 +11,12 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>myTest</artifactId>
 
+    <!-- 这里存放各种公共参数 -->
+    <properties>
+        <!-- 这里可以配置各种版本号，方便统一修改-->
+        <log4j.version>1.2.15</log4j.version>
+    </properties>
+
     <dependencies>
         <!-- 添加mysql的驱动 -->
         <dependency>
@@ -48,6 +54,12 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>apache-log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
 
     </dependencies>
