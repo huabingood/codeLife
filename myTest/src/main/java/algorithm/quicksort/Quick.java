@@ -1,10 +1,14 @@
-package algorithm;
+package algorithm.quicksort;
+
+/**
+ * 我不知道为什么会有数组越界的问题
+ */
 
 public class Quick {
     public static void main(String[] args){
         Integer[] arrs = {6,1,2,7,9,3,4,5,10,8};
 
-        quickSort(arrs,0,arrs.length-1);
+        quickSort(arrs,0,9);
 
         System.out.println(arrs);
     }

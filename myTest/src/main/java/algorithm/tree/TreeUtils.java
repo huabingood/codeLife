@@ -1,6 +1,5 @@
 package algorithm.tree;
 
-import scala.xml.Null;
 
 public class TreeUtils {
 
