@@ -31,7 +31,9 @@
         <encoding>UTF-8</encoding>
         <scala.version>2.11.12</scala.version>
         <spark.version>2.3.2</spark.version>
-        <hadoop.version>2.6.0-cdh5.14.2</hadoop.version>
+        <hadoop.version.cdh>2.6.0-cdh5.14.2</hadoop.version.cdh>
+        <hadoop.version>2.6.0</hadoop.version>
+
     </properties>
 
     <dependencies>

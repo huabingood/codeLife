@@ -31,8 +31,4 @@ public class commonSql {
             e.printStackTrace();
         }
     }
-
-
-
-
 }
