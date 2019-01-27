@@ -1,17 +1,20 @@
 package udfSource;
 
 import org.apache.hadoop.hive.ql.exec.UDF;
+import org.apache.hadoop.io.BytesWritable;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
 
 import java.util.Arrays;
 
 
 
-public class UDFSubstr extends UDF {
+public class SubString extends UDF {
 
     private final int[] index;
     private final Text r;
 
-    public UDFSubstr() {
+    public SubString() {
         index = new int[2];
         r = new Text();
     }
